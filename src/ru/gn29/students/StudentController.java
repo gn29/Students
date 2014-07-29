@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,8 +16,11 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.json.JSONWriter;
 
+import ru.gn29.students.view.SplitLeftPanel;
+
 public class StudentController implements ResultCallBack, Repository {
 	
+	private ArrayList<DataChangedListener> dataChangedListeners;
 	private List<Student> students;
 	private static StudentController instance = null;
 	private boolean isStudentsListChanged = false;
@@ -54,6 +57,9 @@ public class StudentController implements ResultCallBack, Repository {
 		students.add(
 				Student.get(name, secondName, surname, birthday, facultet, groupNumber)
 				);
+		isStudentsListChanged = true;
+		dataChangedNotify();
+		
 	}
 	
 	/**
@@ -62,21 +68,22 @@ public class StudentController implements ResultCallBack, Repository {
 	 */	
 	public void deleteStudent(Student s) {
 		students.remove(s);
+		isStudentsListChanged = true;
+		dataChangedNotify();
 	}
 	
 	/**
-	 * Call this method to serach all students by name
+	 * Call this method to search all students by name
 	 * 
 	 * @param name - the name of the student
 	 * @return List of Student objects
-	 * @deprecated
 	 */	
 	public List<Student> findAllStudentsByName(String name) {
 		
 		ArrayList<Student> list = new ArrayList<Student>();
 		
 		for(Student s : students) {
-			if (name.equals(s.getName())) {
+			if (s.getName().contains(name)) {
 				list.add(s);
 			}
 		}
@@ -232,6 +239,7 @@ public class StudentController implements ResultCallBack, Repository {
 				birthday, 
 				p.getProperty(Student.FACULTET), 
 				Integer.valueOf(p.getProperty(Student.GROUP_NUMBER)));
+			
 			break;
 				
 		case StudentController.ACTION_DELETE :	
@@ -282,13 +290,39 @@ public class StudentController implements ResultCallBack, Repository {
 			
 			break;
 				
-		}
-		
+		}		
 	}
 	
 	@Override
 	public void onExitSave() {
 		saveListToJson();
+	}
+
+	/**
+	 * Добавить Listener для отслеживания изменения данных
+	 * @param listener - слушатель изменения
+	 */
+	@Override
+	public void addDataChangedListener(DataChangedListener listener) {
+		if (listener != null) {
+			dataChangedListeners.add(listener);
+		}		
+	}
+	
+	/**
+	 * Оповестить всех заинтересованных об изменение данных
+	 */	
+	private void dataChangedNotify() {		
+		SplitLeftPanel.get().updateData();
+		
+//		if(dataChangedListeners.size() != 0) {
+//			for (DataChangedListener l : dataChangedListeners) {
+//				if (l != null) {
+//					l.updateData();
+//				}
+//			}
+//		}
+		
 	}
 
 }

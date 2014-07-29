@@ -2,6 +2,8 @@ package ru.gn29.students;
 
 import javax.swing.*;
 
+import ru.gn29.students.view.SplitViewStart;
+
 import java.util.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -22,14 +24,18 @@ public class AddStudentView extends JFrame {
 	private AddStudentView(ResultCallBack r) {
 		this.r = r;
 		mainFrame = this;
-		setSize(new Dimension(500, 320));
-		this.setResizable(true);
+		
+		setSize(new Dimension(500, 260));
+		setResizable(false);
 		setTitle("Добавить студента");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setLocationRelativeTo(null);
 		
 		
 		JPanel p = new JPanel();
-		p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
+		GridLayout mainLayout = new GridLayout(7, 1);
+		mainLayout.setVgap(0);
+		p.setLayout(mainLayout);
 		add(p);
 		
 		name = new JTextField(size);
@@ -42,45 +48,48 @@ public class AddStudentView extends JFrame {
 		JButton addButton = new JButton("Добавить");
 		addButton.addActionListener(new ButtonClickListener());
 		
+		FlowLayout itemLayout = new FlowLayout();
+		itemLayout.setAlignment(FlowLayout.LEFT);
+		
 		JPanel pName = new JPanel();
-		pName.setLayout(new FlowLayout());
+		pName.setLayout(itemLayout);
 		pName.add(new JLabel("Фамилия"));
 		pName.add(name);
 		p.add(pName);
 		
 		
 		pName = new JPanel();
-		pName.setLayout(new FlowLayout());
+		pName.setLayout(itemLayout);
 		pName.add(new JLabel("Имя"));
 		pName.add(secondName);
 		p.add(pName);
 		
 		pName = new JPanel();
-		pName.setLayout(new FlowLayout());
+		pName.setLayout(itemLayout);
 		pName.add(new JLabel("Отчество"));
 		pName.add(surname);
 		p.add(pName);
 
 		pName = new JPanel();
-		pName.setLayout(new FlowLayout());
+		pName.setLayout(itemLayout);
 		pName.add(new JLabel("Дата рождения (дд.мм.гггг)"));
 		pName.add(birthday);
 		p.add(pName);
 
 		pName = new JPanel();
-		pName.setLayout(new FlowLayout());
+		pName.setLayout(itemLayout);
 		pName.add(new JLabel("Факультет"));
 		pName.add(facultet);
 		p.add(pName);
 		
 		pName = new JPanel();
-		pName.setLayout(new FlowLayout());
+		pName.setLayout(itemLayout);
 		pName.add(new JLabel("Номер группы"));
 		pName.add(groupNumber);
 		p.add(pName);
 
 		pName = new JPanel();
-		pName.setLayout(new FlowLayout());
+		pName.setLayout(itemLayout);
 		pName.add(addButton);
 		p.add(pName);
 		

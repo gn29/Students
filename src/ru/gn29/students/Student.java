@@ -124,13 +124,25 @@ public final class Student implements Comparable<Student>, Serializable{
 		
 	}
 	
+	public String getAllFields() {
+		return 
+		getName() + " " + getSecondName() + " " + getSurname() + "\nДата рождения: " + 
+		getBirthdayAsString() + "\nФакультет: " +
+		getFacultet() + "\nНомер группы: " + 
+		getGroupNumber();
+		
+	}
+	
 	@Override
 	public String toString() {
-		return 
-				getName() + " " + getSecondName() + " " + getSurname() + " | " + 
-				getBirthdayAsString() + " | " +
-				getFacultet() + " | " + 
-				getGroupNumber();
+//		return 
+//				getName() + " " + getSecondName() + " " + getSurname() + " | " + 
+//				getBirthdayAsString() + " | " +
+//				getFacultet() + " | " + 
+//				getGroupNumber();
+		
+		return getName() + " " + getSecondName().substring(0, 1) + ". " 
+			+ getSurname().substring(0, 1) + ".";
 	}
 	
 	/**

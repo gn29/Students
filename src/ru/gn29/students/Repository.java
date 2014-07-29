@@ -37,6 +37,11 @@ public interface Repository extends ResultCallBack {
 	public List<Student> getAllStudents();
 	
 	/**
+	 * Добавить слушателя на изменение данных
+	 */
+	public void addDataChangedListener(DataChangedListener listener);
+	
+	/**
 	 * Программа завершается, сделай что нужно
 	 */
 	public void onExitSave();
