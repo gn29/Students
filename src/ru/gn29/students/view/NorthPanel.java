@@ -1,7 +1,7 @@
 package ru.gn29.students.view;
 
+import java.awt.Color;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -16,7 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
+import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
@@ -39,12 +39,11 @@ import ru.gn29.students.StudentController;
 public class NorthPanel extends JPanel {
 	
 	private static final int TEXT_FIELD_SIZE = 25;
-	private JLabel imgCancel;
-	private Component rootComponent;
+	private final JLabel imgCancel;
+//	private Component rootComponent;
 	
 	public NorthPanel(Component c) {
-		super();
-		rootComponent = c;
+//		rootComponent = c;
 		setLayout(new FlowLayout());
 		BufferedImage imgSearchFile = null;
 		BufferedImage imgCancelFile = null;
@@ -117,10 +116,13 @@ public class NorthPanel extends JPanel {
 
 					@Override
 					public void mouseEntered(MouseEvent e) {
+						imgCancel.setBorder(LineBorder.createGrayLineBorder());
+						
 					}
 
 					@Override
 					public void mouseExited(MouseEvent e) {
+						imgCancel.setBorder(null);
 					}
 				
 				}
