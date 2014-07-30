@@ -82,8 +82,11 @@ public class StudentController implements ResultCallBack, Repository {
 		
 		ArrayList<Student> list = new ArrayList<Student>();
 		
+		name = name.toLowerCase();
+		
 		for(Student s : students) {
-			if (s.getName().contains(name)) {
+			String sName = s.getName().toLowerCase();
+			if (sName.startsWith(name)) {
 				list.add(s);
 			}
 		}
