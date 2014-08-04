@@ -13,7 +13,7 @@ main -> StudentsConsoleStart.java
 ================
 -> main(String... args) from  Students / src / ru / gn29 / students / view / SplitViewStart.java
 
-General tip: better to run from Eclipse IDE becouse I used some resources like pictures and json "DB" file. So when you'll open project in Eclipse all recourses will be available without any tuning.
+General tip: better to run from Eclipse IDE becouse I used some resources like pictures and json "DB" file. So when you'll open project in Eclipse all recourses will be available without tuning.
 
 Any Q's please write to 29gena@gmail.com
 
